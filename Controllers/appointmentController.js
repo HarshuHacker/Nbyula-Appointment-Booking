@@ -74,3 +74,23 @@ module.exports.createAppointment = async function(req, res) {
     })
   }
 }
+
+module.exports.getUserAppointment = async function(req, res){
+  try {
+    let user = await User.findOne({email: req.body.email})
+    usersArray = []
+    for (let i of user.appointment) {
+      appoint = await Appointment.findById(i).populate('host', 'name email').populate('guest', 'name email')
+      usersArray.push(appoint)
+    }
+    return res.json(200, {
+      message: `List Of Appointments Of ${user.name}`,
+      data: usersArray
+    })
+  } catch (error) {
+    console.log(error)
+    return res.json(500, {
+      message: "Error In Finding Appointment"
+    })
+  }
+}
