@@ -13,15 +13,6 @@ const appointmentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  name: {
-    type: String,
-    required: true
-  },
   host: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
