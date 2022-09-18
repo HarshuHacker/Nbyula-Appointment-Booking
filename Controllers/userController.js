@@ -63,3 +63,27 @@ module.exports.login = async function(req,res) {
     })
   }
 }
+
+module.exports.allUser = async function(req, res) {
+  try {
+    // Finding All Users
+    let alluser = await User.find({})
+
+    // Sending Only The Name And Email Of The Users
+    return res.json(200, {
+      data: 
+        alluser.map((user) => {
+          return {
+            name: user.name,
+            email: user.email
+          }
+        }),
+      message: "User List"
+    })
+  } catch (err) {
+    console.log("Error : ",err)
+    return res.json(500, {
+      message: "Error In Fetching User List"
+    })
+  }
+}
