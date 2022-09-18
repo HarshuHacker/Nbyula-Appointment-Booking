@@ -87,3 +87,24 @@ module.exports.allUser = async function(req, res) {
     })
   }
 }
+
+module.exports.oneUser = async function(req, res) {
+  try {
+    // Finding The User With The Email
+    let user = await User.findOne({email: req.body.email})
+
+    // Sending Only The Name And Email Of The User
+    return res.json(200, {
+      data: {
+        email: user.email,
+        name: user.name
+      },
+      message: "User List"
+    })
+  } catch (err) {
+    console.log("Error : ",err)
+    return res.json(500, {
+      message: "Error In Fetching The User"
+    })
+  }
+}
