@@ -26,7 +26,7 @@ module.exports.register = async function(req, res){
       })
     }
   } catch (err) {
-    return res.json(200, {
+    return res.json(500, {
       message: "Error In Finding User In Signing Up"
     })
   }
@@ -60,6 +60,24 @@ module.exports.login = async function(req,res) {
     console.log("Error : ",err)
     return res.json(500, {
       message: "Internal Server Error"
+    })
+  }
+}
+
+module.exports.updateProfile = async function(req, res) {
+  try {
+    await User.findOneAndUpdate({email: req.body.email}, {
+      name: req.body.name, 
+      password: req.body.password, 
+      startTime: req.body.startTime, 
+      endTime: req.body.endTime
+    })
+    return res.json(500, {
+      message: "Profile Updated Successfully"
+    })
+  } catch (error) {
+    return res.json(500, {
+      message: "Error In Updating User Details"
     })
   }
 }
