@@ -94,3 +94,30 @@ module.exports.getUserAppointment = async function(req, res){
     })
   }
 }
+
+module.exports.getUpcomingAppointments = async function(req, res) {
+  try {
+    let user = await User.findOne({email: req.body.email})
+    usersArray = []
+    for (let i of user.appointment) {
+      appoint = await Appointment.findById(i).populate('host', 'name email').populate('guest', 'name email')
+      time = Number(appoint.time.replace(":", ""))
+      currTime = Date().toString().split(' ')[4].split(':')
+      hrs = currTime[0]
+      min = currTime[1]
+      currTime = Number(hrs+min)
+      if(time >= currTime) {
+        usersArray.push(appoint)
+      }
+    }
+    return res.json(200, {
+      message: `List Of Upcoming Appointments Of ${user.name}`,
+      data: usersArray
+    })
+  } catch (err) {
+    console.log(err)
+    return res.json(500, {
+      message: "Unable To Find Upcoming Appointments"
+    })
+  }
+}
