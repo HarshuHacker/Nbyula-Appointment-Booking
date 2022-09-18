@@ -21,7 +21,13 @@ const userSchema = new mongoose.Schema({
   endTime: {
     type: String,
     required: true
-  }
+  },
+  appointment: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Appointment"
+    }
+  ]
 }, {
   timestamps: true
 })
