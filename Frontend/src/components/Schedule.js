@@ -44,7 +44,6 @@ export default function Schedule() {
         url: `https://nbyula-appointment-booking.vercel.app/users/all-user`,
       })
       .then((res) => {
-        console.log(res.data.data);
         const d = res.data.data;
 
         d.forEach((data) => {
@@ -53,7 +52,6 @@ export default function Schedule() {
         });
       })
       .catch((err) => {
-        console.log(err.response);
         setAlertMessage(err.response.data.message);
         setAlertSeverity("error");
         setShowAlert(true);
@@ -76,8 +74,6 @@ export default function Schedule() {
     const agenda = data.get("agenda");
     const time = data.get("time");
 
-    console.log(email, activeGuest.split(" - ")[1], title, agenda);
-
     if (email && username && time && activeGuest) {
       axios
         .request({
@@ -92,13 +88,11 @@ export default function Schedule() {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setAlertMessage("Successfully Scheduled a meeting");
           setAlertSeverity("success");
           setShowAlert(true);
         })
         .catch((err) => {
-          console.log(err.response);
           setAlertMessage(err.response.data.message);
           setAlertSeverity("error");
           setShowAlert(true);
@@ -197,7 +191,6 @@ export default function Schedule() {
                       type={"time"}
                       value={time}
                       onChange={(e) => {
-                        console.log(e.target.value);
                         setTime(e.target.value);
                       }}
                       autoFocus

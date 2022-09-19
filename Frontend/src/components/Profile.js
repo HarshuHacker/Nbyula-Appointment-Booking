@@ -77,7 +77,8 @@ const Profile = () => {
         if (
           (pass.length == 0 || pass == res.data.data.password) &&
           startTime == res.data.data.startTime &&
-          endTime == res.data.data.endTime && username == res.data.data.name
+          endTime == res.data.data.endTime &&
+          username == res.data.data.name
         ) {
           setAlertSeverity("warning");
           setAlertMessage("No Changes Were Made!");
@@ -99,7 +100,6 @@ const Profile = () => {
               },
             })
             .then((res) => {
-              console.log(res.data);
               state.email = res.data.user.email;
               state.username = res.data.user.name;
               state.startTime = res.data.user.startTime;
@@ -110,8 +110,7 @@ const Profile = () => {
               setShowAlert(true);
             })
             .catch((err) => {
-              setUsername(state.username)
-              console.log("DFdsfa");
+              setUsername(state.username);
               setAlertSeverity("error");
               setAlertMessage(err.response.data.message);
               setShowAlert(true);

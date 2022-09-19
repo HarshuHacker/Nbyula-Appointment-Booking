@@ -68,14 +68,12 @@ export default function Register() {
             },
           })
           .then((res) => {
-            console.log(res.data.data);
             setAlertMessage(res.data.message);
             setAlertSeverity("success");
             setShowAlert(true);
             navigate("/login");
           })
           .catch((err) => {
-            console.log(err.response);
             setAlertMessage(err.response.data.message);
             setAlertSeverity("error");
             setShowAlert(true);

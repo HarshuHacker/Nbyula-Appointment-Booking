@@ -57,7 +57,6 @@ export default function Login() {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setAlertMessage(res.data.message);
         setAlertSeverity("success");
         setShowAlert(true);
@@ -68,13 +67,10 @@ export default function Login() {
           state.username = res.data.user.name;
           state.startTime = res.data.user.startTime;
           state.endTime = res.data.user.endTime;
-
-          console.log(state);
           navigate("/profile");
         }, 1000);
       })
       .catch((err) => {
-        console.log(err.response);
         setAlertMessage(err.response.data.message);
         setAlertSeverity("error");
         setShowAlert(true);
