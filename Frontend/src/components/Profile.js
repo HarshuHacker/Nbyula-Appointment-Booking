@@ -77,8 +77,7 @@ const Profile = () => {
         if (
           (pass.length == 0 || pass == res.data.data.password) &&
           startTime == res.data.data.startTime &&
-          endTime == res.data.data.endTime &&
-          (username.length == 0 || username == res.data.data.name)
+          endTime == res.data.data.endTime && username == res.data.data.name
         ) {
           setAlertSeverity("warning");
           setAlertMessage("No Changes Were Made!");
@@ -87,9 +86,6 @@ const Profile = () => {
         } else {
           const updatedPassword =
             pass.length > 0 ? pass : res.data.data.password;
-          const updatedName =
-            username.length > 0 ? username : res.data.data.name;
-          console.log(updatedName);
           axios
             .request({
               method: "post",
@@ -97,24 +93,24 @@ const Profile = () => {
               params: {
                 email,
                 password: updatedPassword,
-                name: updatedName,
+                name: username,
                 startTime: startTime,
                 endTime: endTime,
               },
             })
             .then((res) => {
               console.log(res.data);
-              // state.loggedIn = true;
               state.email = res.data.user.email;
-              state.username = updatedName;
-              state.startTime = startTime;
-              state.endTime = endTime;
+              state.username = res.data.user.name;
+              state.startTime = res.data.user.startTime;
+              state.endTime = res.data.user.endTime;
 
               setAlertSeverity("success");
               setAlertMessage(res.data.message);
               setShowAlert(true);
             })
             .catch((err) => {
+              setUsername(state.username)
               console.log("DFdsfa");
               setAlertSeverity("error");
               setAlertMessage(err.response.data.message);
