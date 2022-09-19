@@ -17,7 +17,7 @@ const getIST = () => {
   var currentTime = new Date();
   var currentOffset = currentTime.getTimezoneOffset();
   var ISTTime = new Date(
-    currentTime.getTime() + (ISTOffset + currentOffset) * 60000
+    currentTime.getTime() + (330 + currentOffset) * 60000
   );
   var hoursIST = String(ISTTime.getHours());
   var minutesIST = String(ISTTime.getMinutes());
@@ -91,6 +91,7 @@ module.exports.createAppointment = async function (req, res) {
       message: "Appointment Created Successfully",
     });
   } catch (err) {
+    console.log(err)
     return res.json(500, {
       message: "Error In Creating Appointment",
     });
