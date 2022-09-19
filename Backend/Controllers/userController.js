@@ -4,13 +4,13 @@ module.exports.register = async function(req, res){
   try {
     
     // Checking For The Email Id InThe Database
-    let user = await User.findOne({email: req.body.email})
+    let user = await User.findOne({email: req.query.email})
 
     // If The Email Id Does't Exist In The Database
     if(!user) {
       try {
         // Creating New User
-        await User.create(req.body) 
+        await User.create(req.query) 
         return res.json(200, {
           message: "Created An Account Successfully"
         })
@@ -21,7 +21,7 @@ module.exports.register = async function(req, res){
       }
     } else {
       // A User Already Exist With This Email Id
-      return res.json(200, {
+      return res.json(418, {
         message: "User Already Exists !!"
       })
     }
@@ -36,23 +36,21 @@ module.exports.login = async function(req,res) {
   try {
     // Finding User Using The Email Id
     let user = await User.findOne({
-      email: req.body.email
+      email: req.query.email
     })
-
+    console.log(req.query.email);
     // If Passwords Does't Match
-    if(!user || user.password != req.body.password){
+    if(!user || user.password != req.query.password){
       return res.json(422, {
-        message: "Invalid Usertname Or Password"
+        email: req.query.email,
+        message: "Invalid Username Or Password",
       })
     }
   
     // If The User Details Are Correct
     return res.json(200, {
       message: "Sign In Successfully",
-      data: {
-        name: user.name,
-        email: user.email
-      }
+      user
     })
   }
   catch(err)
@@ -66,14 +64,25 @@ module.exports.login = async function(req,res) {
 
 module.exports.updateProfile = async function(req, res) {
   try {
-    await User.findOneAndUpdate({email: req.body.email}, {
-      name: req.body.name, 
-      password: req.body.password, 
-      startTime: req.body.startTime, 
-      endTime: req.body.endTime
+    let user = await User.findOne({
+      email: req.query.email
     })
-    return res.json(500, {
-      message: "Profile Updated Successfully"
+
+    if(req.query.name === "" || req.query.password === "") {
+      return res.json(500, {
+        message: "Password Or Name Can't Be Empty"
+      })
+    }
+
+    await User.findOneAndUpdate({email: req.query.email}, {
+      name: req.query.name, 
+      password: req.query.password, 
+      startTime: req.query.startTime, 
+      endTime: req.query.endTime
+    })
+    return res.json(200, {
+      message: "Profile Updated Successfully",
+      user
     })
   } catch (error) {
     return res.json(500, {
@@ -109,14 +118,11 @@ module.exports.allUser = async function(req, res) {
 module.exports.oneUser = async function(req, res) {
   try {
     // Finding The User With The Email
-    let user = await User.findOne({email: req.body.email})
+    let user = await User.findOne({email: req.query.email})
 
     // Sending Only The Name And Email Of The User
     return res.json(200, {
-      data: {
-        email: user.email,
-        name: user.name
-      },
+      data: user,
       message: "User List"
     })
   } catch (err) {
