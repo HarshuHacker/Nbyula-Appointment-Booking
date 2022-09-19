@@ -64,9 +64,6 @@ module.exports.login = async function(req,res) {
 
 module.exports.updateProfile = async function(req, res) {
   try {
-    let user = await User.findOne({
-      email: req.query.email
-    })
 
     if(req.query.name === "" || req.query.password === "") {
       return res.json(500, {
@@ -74,12 +71,13 @@ module.exports.updateProfile = async function(req, res) {
       })
     }
 
-    await User.findOneAndUpdate({email: req.query.email}, {
+    let user = await User.findOneAndUpdate({email: req.query.email}, {
       name: req.query.name, 
       password: req.query.password, 
       startTime: req.query.startTime, 
       endTime: req.query.endTime
-    })
+    }, {new: true})
+
     return res.json(200, {
       message: "Profile Updated Successfully",
       user
