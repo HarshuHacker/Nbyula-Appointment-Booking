@@ -48,7 +48,7 @@ export default function Schedule() {
 
         d.forEach((data) => {
           if (data.email === state.email) {
-          } else temp.push(data.name + " (" + data.email + ") Time: " + data.startTime + " - " + data.endTime);
+          } else temp.push(data.name + " - " + data.email + " - " + "(" +  data.startTime + " - " + data.endTime + ")");
         });
       })
       .catch((err) => {
@@ -93,6 +93,7 @@ export default function Schedule() {
           setShowAlert(true);
         })
         .catch((err) => {
+          console.log(activeGuest.split(" - ")[1])
           setAlertMessage(err.response.data.message);
           setAlertSeverity("error");
           setShowAlert(true);
@@ -103,8 +104,6 @@ export default function Schedule() {
       setShowAlert(true);
     }
   };
-
-  console.log(guests)
 
   return (
     <Grid container direction={"column"} spacing={2}>
