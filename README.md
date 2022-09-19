@@ -1,6 +1,12 @@
 # Nbyula-Appointment-Booking
 This Repository Is For A Project Given By Nbyula - Appointment Booking
 
+User Can Register Themselves With Their Slot Timings And Can Book An Appointment With Other Users On The Same Day. 
+Some Edge Cases Which Are Taken Care Of Are : 
+1. If The Host Or The Guest Is Try To Book An Appointment Which Is Out Of Their Slot Then Error Pops Up.
+2. If Host Or The Guest Is Try To Book An Appointment At A Time When Their Is Another Appointment Of The Host Or The Guest, Then Error Pops Up.
+3. If The Users Try To Book An Appointment Before The Current Time Then Error Pops Up. User Can Book An Appointment Only For The Same Day.
+
 Both Frontend And The Backend Is Deployed On Vercel
 
 ## Frontend Link - 
