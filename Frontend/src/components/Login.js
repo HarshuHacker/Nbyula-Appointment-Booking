@@ -50,7 +50,7 @@ export default function Login() {
     axios
       .request({
         method: "post",
-        url: `http://localhost:9000/users/login`,
+        url: `https://nbyula-appointment-booking.vercel.app/users/login`,
         params: {
           email: email,
           password: pass,

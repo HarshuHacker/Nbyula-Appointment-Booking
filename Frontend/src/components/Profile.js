@@ -68,7 +68,7 @@ const Profile = () => {
     axios
       .request({
         method: "get",
-        url: "http://localhost:9000/users/one-user",
+        url: "https://nbyula-appointment-booking.vercel.app/users/one-user",
         params: {
           email,
         },
@@ -93,7 +93,7 @@ const Profile = () => {
           axios
             .request({
               method: "post",
-              url: `http://localhost:9000/users/update-profile`,
+              url: `https://nbyula-appointment-booking.vercel.app/users/update-profile`,
               params: {
                 email,
                 password: updatedPassword,

@@ -29,7 +29,7 @@ const UpcomingMeetings = () => {
     axios
       .request({
         method: "get",
-        url: `http://localhost:9000/appointments/get-upcoming-appointment`,
+        url: `https://nbyula-appointment-booking.vercel.app/appointments/get-upcoming-appointment`,
         params: {
           email: state.email,
         },

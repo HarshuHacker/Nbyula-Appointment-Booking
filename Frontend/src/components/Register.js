@@ -58,7 +58,7 @@ export default function Register() {
         axios
           .request({
             method: "post",
-            url: `http://localhost:9000/users/register`,
+            url: `https://nbyula-appointment-booking.vercel.app/users/register`,
             params: {
               email,
               password,

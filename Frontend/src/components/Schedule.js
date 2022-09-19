@@ -41,7 +41,7 @@ export default function Schedule() {
     axios
       .request({
         method: "get",
-        url: `http://localhost:9000/users/all-user`,
+        url: `https://nbyula-appointment-booking.vercel.app/users/all-user`,
       })
       .then((res) => {
         console.log(res.data.data);
@@ -82,7 +82,7 @@ export default function Schedule() {
       axios
         .request({
           method: "post",
-          url: `http://localhost:9000/appointments/create-appointment`,
+          url: `https://nbyula-appointment-booking.vercel.app/appointments/create-appointment`,
           params: {
             host: email,
             guest: activeGuest.split(" - ")[1],
