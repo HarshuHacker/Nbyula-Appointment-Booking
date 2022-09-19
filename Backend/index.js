@@ -5,10 +5,10 @@ const app = express()
 const port = 9000
 
 app.use(express.urlencoded({extended: true}))
-const db = require('./config/mongoose')
+const db = require('./Config/mongoose')
 
 app.use(cors())
-app.use('/', require('./routes'))
+app.use('/', require('./Routes'))
 
 app.use(async(req, res, next) => {
   next(createError.NotFound())
