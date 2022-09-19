@@ -48,7 +48,7 @@ export default function Schedule() {
 
         d.forEach((data) => {
           if (data.email === state.email) {
-          } else temp.push(data.name + " - " + data.email);
+          } else temp.push(data.name + " (" + data.email + ") Time: " + data.startTime + " - " + data.endTime);
         });
       })
       .catch((err) => {
@@ -103,6 +103,8 @@ export default function Schedule() {
       setShowAlert(true);
     }
   };
+
+  console.log(guests)
 
   return (
     <Grid container direction={"column"} spacing={2}>

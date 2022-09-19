@@ -102,6 +102,8 @@ module.exports.allUser = async function (req, res) {
         return {
           name: user.name,
           email: user.email,
+          startTime: user.startTime,
+          endTime: user.endTime
         };
       }),
       message: "User List",
