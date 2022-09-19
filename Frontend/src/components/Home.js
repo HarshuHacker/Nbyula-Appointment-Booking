@@ -115,14 +115,6 @@ const Home = ({ children, pageTitle }) => {
         }}
       >
         {children}
-        {/* <Grid container direction={"column"} spacing={2}>
-                    <Grid item>
-                        <Box>
-                            
-                        </Box>
-                    </Grid>
-                    <Grid item>{children}</Grid>
-                </Grid> */}
       </Grid>
     </Grid>
   );
